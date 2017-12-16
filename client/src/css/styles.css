@@ -5,6 +5,15 @@
   font-family: "Lato", sans-serif;
 }
 
+html {
+  background: #F8F8F8;
+  height: 100%;
+}
+
+#root {
+  background: #F8F8F8;
+}
+
 /*******************
 
 NAVBAR
@@ -20,6 +29,18 @@ NAVBAR
   padding: 10px;
   font-weight: 100;
   border-radius: 0;
+  background: #1f1f1f;
+  border: 0;
+  margin: 0;
+}
+
+.navbar .navbar-nav li a {
+  color: #fff;
+  background-color: transparent !important;
+}
+
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover {
+  color: #fff;
 }
 
 .myli {
@@ -31,12 +52,8 @@ iframe {
   margin: 0 auto;
 }
 
-.search-nav {
-  margin-top: -10px;
-}
-
 .link-nav {
-  margin-top: 15px;
+  margin-top: 10px;
   font-size: 18px;
 }
 
@@ -138,12 +155,12 @@ BANNER
 ********************/
 
 .banner {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../img/bg.jpeg");
+  background-image: linear-gradient(rgba(31, 31, 31, 0.5), rgba(31, 31, 31, 0.5)), url("../img/bg.jpeg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
   width: 100%;
-  height: 86.4vh;
+  height: 88vh;
   position: relative;
 }
 
@@ -167,4 +184,77 @@ BANNER
 
 .box-text h3 {
   font-weight: 300;
+}
+
+/*******************
+
+EVENT LIST
+
+********************/
+
+.grid {
+  margin-top: 20px;
+}
+
+.event-card {
+  background: linear-gradient(to right, #ff9966, #ff5e62);
+  margin-bottom: 20px;
+  padding: 20px;
+  color: white;
+  text-transform: uppercase;
+  font-weight: 700;
+  border-radius: 8px;
+  transition: all .2s ease-in-out;
+  cursor: pointer;
+  -webkit-animation: slidein 1s;
+  animation: slidein 1s;
+}
+
+.event-card * {
+  color: #fff;
+  text-shadow: 1px 1px 5px #000;
+}
+
+.event-header {
+  -webkit-animation: fadein 2s;
+}
+
+@-webkit-keyframes fadein {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+@keyframes fadein {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+@-webkit-keyframes slidein {
+  from {margin-left: 100%}
+  to {margin-left: 0}
+}
+
+.event-card:hover {
+  transform: scale(1.030);
+  box-shadow: 3px 3px 10px #000;
+}
+
+.event-card:active {
+  transform: scale(0.99);
+}
+
+.event-card h3 {
+  margin: 0;
+}
+
+.search-bar {
+  padding: 20px;
+  width: 50%;
+  font-size: 1.2em;
+  margin: 0 auto 20px auto;
+  display: inline-block;
+}
+
+.search-button {
+  display: inline-block;
 }

@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import {GoogleApiWrapper, Map, Marker, InfoWindow} from "google-maps-react";
 import {connect} from "react-redux";
-import {Button} from "react-bootstrap";
 import {getEvents} from "../redux/currentevents";
 
 const styles = {
@@ -45,7 +44,7 @@ export class MapContainer extends Component {
 
   render() {
 
-    const marker = this.props.currentEvents.map((event, i) => {
+    const marker = this.props.currentEvents.map((event) => {
       return (
         <Marker
           onClick={this.onMarkerClick}
@@ -87,7 +86,7 @@ export class MapContainer extends Component {
             <div className="infobox-container">
               <p className="infobox-text">{this.state.selectedPlace.description}</p>
             </div>
-            <Button className="infobox-button" bsStyle="primary" bsSize="lg">Buy Tickets</Button>
+            <a target="_blank" href={this.state.selectedPlace.src} className="infobox-button">Buy Tickets</a>
           </div>
         </InfoWindow>
       </Map>

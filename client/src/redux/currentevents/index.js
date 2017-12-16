@@ -13,10 +13,11 @@ if(mm<10){
 
 let currentDate = yyyy+'-'+mm+'-'+dd;
 
-export function getEvents() {
+export function getEvents(search) {
   return (dispatch) => {
-    axios.get(`https://app.ticketmaster.com/discovery/v2/events.json?page=1&size=200&startDateTime${currentDate}countryCode=US&apikey=D3Gkc7pF33x7oLfZn57RuRZNZsFpQNp5`).then((response) => {
+    axios.get(`https://app.ticketmaster.com/discovery/v2/events.json?page=20&keyword=${search}&apikey=D3Gkc7pF33x7oLfZn57RuRZNZsFpQNp5`).then((response) => {
       let currentEvents = response.data._embedded.events;
+      console.log(currentEvents);
       dispatch({
         type: "GET_EVENTS",
         currentEvents
