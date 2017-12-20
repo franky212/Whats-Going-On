@@ -1,21 +1,8 @@
 import axios from "axios";
 
-let today = new Date();
-let dd = today.getDate();
-let mm = today.getMonth()+1;
-let yyyy = today.getFullYear();
-if(dd<10){
-  dd='0'+dd
-}
-if(mm<10){
-  mm='0'+mm
-}
-
-let currentDate = yyyy+'-'+mm+'-'+dd;
-
 export function getEvents(search) {
   return (dispatch) => {
-    axios.get(`https://app.ticketmaster.com/discovery/v2/events.json?page=20&keyword=${search}&apikey=D3Gkc7pF33x7oLfZn57RuRZNZsFpQNp5`).then((response) => {
+    axios.get(`https://app.ticketmaster.com/discovery/v2/events.json?0&keyword=${search}&countryCode=US&size=200&apikey=klv4vudES1FBzSdOy2xaaSgrqhMJxFc6`).then((response) => {
       let currentEvents = response.data._embedded.events;
       console.log(currentEvents);
       dispatch({

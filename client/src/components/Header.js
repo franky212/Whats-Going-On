@@ -1,13 +1,6 @@
 import React, {Component} from "react";
-import {Nav, NavItem, Navbar, FormGroup, FormControl} from "react-bootstrap";
+import {Nav, NavItem, Navbar,} from "react-bootstrap";
 import {LinkContainer} from "react-router-bootstrap";
-import $ from "jquery";
-
-$(function() {
-  $(document).scroll(function() {
-    $(".navbar").toggleClass('navbar-fixed-top', $(this).scrollTop() > 0);
-  });
-})
 
 export default class Header extends Component {
   constructor(props) {
@@ -27,7 +20,7 @@ export default class Header extends Component {
     return (
       <Navbar>
         <Navbar.Header>
-          <LinkContainer to="/Home"><img alt="Logo" className="logo" src={require("../img/whats-going-on-logo.png")} /></LinkContainer>
+          <LinkContainer to="/"><img alt="Logo" className="logo" src={require("../img/whats-going-on-logo.png")} /></LinkContainer>
           <Navbar.Toggle/>
         </Navbar.Header>
         <Navbar.Collapse>

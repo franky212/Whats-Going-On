@@ -39,7 +39,32 @@ NAVBAR
   background-color: transparent !important;
 }
 
+.navbar-nav li::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 2px;
+    margin-left: 50%;
+    background: #FF5E62;
+    -webkit-transition: all .20s ease-out;
+    -o-transition: all .20s ease-out;
+    transition: all .20s ease-out;
+}
+
+.navbar-nav li:hover::after {
+    width: 100%;
+    margin-left: 0;
+}
+
+.navbar-nav ul li a:hover {
+  color: #fff;
+}
+
 .navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover {
+  color: #fff;
+}
+
+.navbar-default .navbar-nav>li>a:focus, .navbar-default .navbar-nav>li>a:hover {
   color: #fff;
 }
 
@@ -197,7 +222,7 @@ EVENT LIST
 }
 
 .event-card {
-  background: linear-gradient(to right, #ff9966, #ff5e62);
+  background: linear-gradient(to left, #FF3338, #FF5E62);
   margin-bottom: 20px;
   padding: 20px;
   color: white;
@@ -251,10 +276,25 @@ EVENT LIST
   padding: 20px;
   width: 50%;
   font-size: 1.2em;
-  margin: 0 auto 20px auto;
-  display: inline-block;
+  margin: 0 auto;
+  text-align: center;
+  display: block;
 }
 
 .search-button {
-  display: inline-block;
+  background-color: #FF3338;
+  color: #fff;
+  margin: 20px auto;
+  display: block;
+  transition: background-color .2s ease-in-out;
+  width: 15%;
+  border: 0;
+  text-shadow: 1px 1px 5px #000;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.search-button:hover {
+  background-color: #C7FFC4;
+  color: #fff;
 }

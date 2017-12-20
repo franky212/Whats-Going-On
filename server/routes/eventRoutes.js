@@ -1,13 +1,28 @@
 const express = require("express");
-const eventRoutes = express.Router();
-const event = require("../models/event");
+const favoriteRoutes = express.Router();
+const Favorite = require("../models/event");
 
-eventRoutes.route("/")
+favoriteRoutes.route("/")
   .get((req, res) => {
-    event.find((err, events) => {
+    Favorite.find((err, events) => {
       if(err) return res.status(500).send(err);
       res.send(events);
     })
   })
+  .post((req, res) => {
+    const newFavorite = new Favorite(req.body);
+    newFavorite.save(err => {
+      if(err) return res.status(500).send(err);
+      res.send(newFavorite);
+    })
+  })
 
-module.exports = eventRoutes;
+favoriteRoutes.route("/:id")
+  .delete((req, res) => {
+    Favorite.findByIdAndRemove(req.params.id, (err, event) => {
+      if(err) return res.status(500).send(err);
+      res.send(event);
+    })
+  })
+
+module.exports = favoriteRoutes;

@@ -3,10 +3,12 @@ import thunk from "redux-thunk";
 
 import events from "./events";
 import currentEvents from "./currentevents";
+import localEvents from "./localevents";
 
 const rootReducer = combineReducers({
   events,
-  currentEvents
+  currentEvents,
+  localEvents
 });
 
 export default createStore(rootReducer, applyMiddleware(thunk));

@@ -7,11 +7,11 @@ class SetUp extends Component {
   constructor() {
     super();
     this.state = {
-      title: "",
+      name: "",
+      date: "",
       address: "",
-      youUrl: "",
-      description: "",
-      date: ""
+      url: "",
+      description: ""
     }
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -39,7 +39,7 @@ class SetUp extends Component {
     }
 
     let currentDate = yyyy+'-'+mm+'-'+dd;
-    
+
     return (
       <form onSubmit={this.handleSubmit} className="setup-form">
         <ControlLabel>Event Title</ControlLabel>
@@ -47,7 +47,7 @@ class SetUp extends Component {
           value={this.state.title}
           onChange={this.handleInputChange}
           bsSize="large"
-          name="title"
+          name="name"
           type="text"
           placeholder="Enter Event Title" required/>
         <ControlLabel>Event Date</ControlLabel>

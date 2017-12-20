@@ -1,8 +1,9 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
+import {addEvent} from "../redux/localevents";
 import {getEvents} from "../redux/currentevents";
+import {addMarker} from "../redux/events";
 import {Grid, Row, Col, FormControl, Button} from "react-bootstrap";
-import $ from "jquery";
 
 class EventList extends Component {
   constructor(props) {
@@ -12,6 +13,11 @@ class EventList extends Component {
     }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick(event) {
+    this.props.addEvent(event);
   }
 
   handleInputChange(e) {
@@ -28,10 +34,10 @@ class EventList extends Component {
       return (
         <Row key={event.id}>
           <Col xs={12}>
-            <div className="event-card">
+            <div onClick={() => this.handleClick(event)} className="event-card">
               <h2 className="event-header">{event._embedded.venues[0].name}</h2>
-              <small>{event._embedded.venues[0].city.name}</small>
               <h4>{event.name}</h4>
+              <small>{event._embedded.venues[0].city.name}</small>
               <h5>{event.dates.start.localDate}</h5>
             </div>
           </Col>
@@ -43,14 +49,13 @@ class EventList extends Component {
         <Grid className="grid">
           <form onSubmit={this.handleSubmit}>
             <FormControl
+              className="search-bar"
+              onChange={this.handleInputChange}
               name="search"
-              value= {this.state.search}
-              onChange= {this.handleInputChange}
-              placeholder="Search..."
-              className="search-bar" />
+              placeholder="Search..." />
             <Button
-              type="submit"
-              className="search-button">Search</Button>
+              bsSize="large"
+              className="search-button">Submit</Button>
           </form>
           {listItems}
         </Grid>
@@ -59,4 +64,4 @@ class EventList extends Component {
   }
 }
 
-export default connect(state => state, {getEvents})(EventList);
+export default connect(state => state, {addMarker, getEvents, addEvent})(EventList);

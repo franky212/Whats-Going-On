@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {GoogleApiWrapper, Map, Marker, InfoWindow} from "google-maps-react";
 import {connect} from "react-redux";
-import {getEvents} from "../redux/currentevents";
+import {getLocalEvents} from "../redux/localevents";
 
 const styles = {
   width: "100vw",
@@ -38,21 +38,18 @@ export class MapContainer extends Component {
     }
   }
 
-  componentDidMount() {
-    this.props.getEvents();
-  }
-
   render() {
 
-    const marker = this.props.currentEvents.map((event) => {
+    const marker = this.props.localEvents.map((event, i) => {
       return (
         <Marker
           onClick={this.onMarkerClick}
-          key={event.id}
-          position={{lat: event._embedded.venues[0].location.latitude, lng: event._embedded.venues[0].location.longitude}}
+          key={event + i}
+          position={{lat: event.address.location.lat, lng: event.address.location.lng}}
           name={event.name}
+          imgUrl={event.imgUrl}
           src={event.url}
-          date={event.dates.start.localDate}
+          date={event.date}
           description={event.description}/>)
     });
 
@@ -64,7 +61,7 @@ export class MapContainer extends Component {
           lat: 40.7608,
           lng: -111.8910
         }}
-        zoom={6}
+        zoom={5}
         onClick={this.onMapClicked}
         styles={[{
           featureType: "poi",
@@ -82,7 +79,7 @@ export class MapContainer extends Component {
           <div>
             <h1 className="infobox-header">{this.state.selectedPlace.name}</h1>
             <h3 className="infobox-subheading">Date: {this.state.selectedPlace.date}</h3>
-            <iframe title="Artist Video" width="560" height="315" src={this.state.selectedPlace.src} frameBorder="0"></iframe>
+            <img width="100%" src={this.state.selectedPlace.imgUrl} />
             <div className="infobox-container">
               <p className="infobox-text">{this.state.selectedPlace.description}</p>
             </div>
@@ -94,7 +91,7 @@ export class MapContainer extends Component {
   }
 }
 
-const reduxMap = connect(state => state, {getEvents})(MapContainer)
+const reduxMap = connect(state => state, {getLocalEvents})(MapContainer)
 
 export default GoogleApiWrapper({
   apiKey: "AIzaSyA5T5nkMVdT_LDRubQIEm_gEtsq9U_LTZM"
