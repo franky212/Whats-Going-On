@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const eventSchema = new Schema({
+  id: String,
   name: String,
   date: String,
   address: {
@@ -11,7 +12,8 @@ const eventSchema = new Schema({
       lng: Number
     }
   },
-  url: String
+  url: String,
+  imgUrl: String
 });
 
 module.exports = mongoose.model("event", eventSchema);

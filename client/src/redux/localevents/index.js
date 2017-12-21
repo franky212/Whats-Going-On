@@ -17,6 +17,7 @@ export function addEvent(event) {
   let addressName = event._embedded.venues[0].address.line1 + ", " + event._embedded.venues[0].city.name + ", " + event._embedded.venues[0].state.stateCode + ", " + event._embedded.venues[0].postalCode;
   return {
     type: "ADD_EVENT",
+    id: event.id,
     name: event.name,
     date: event.dates.start.localDate,
     address: {
