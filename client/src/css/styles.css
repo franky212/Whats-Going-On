@@ -46,9 +46,10 @@ NAVBAR
     height: 2px;
     margin-left: 50%;
     background: #FF5E62;
-    -webkit-transition: all .20s ease-out;
-    -o-transition: all .20s ease-out;
-    transition: all .20s ease-out;
+    -webkit-transition: all .2s ease-out;
+    -moz-transition: all .2s ease-out;
+    -o-transition: all .2s ease-out;
+    transition: all .2s ease-out;
 }
 
 .navbar-nav li:hover::after {

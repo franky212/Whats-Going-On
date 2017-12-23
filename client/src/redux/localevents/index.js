@@ -13,7 +13,6 @@ export function getLocalEvents() {
 }
 
 export function addEvent(event) {
-  console.log(event);
   let addressName = event._embedded.venues[0].address.line1 + ", " + event._embedded.venues[0].city.name + ", " + event._embedded.venues[0].state.stateCode + ", " + event._embedded.venues[0].postalCode;
   return {
     type: "ADD_EVENT",
