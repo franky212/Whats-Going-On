@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import {connect} from "react-redux";
 import {addEvent} from "../redux/localevents";
 import {getEvents} from "../redux/currentevents";
-import {addMarker} from "../redux/events";
+import {addMarker} from "../redux/mapmarker";
 import {Grid, Row, Col, FormControl, Button, Alert} from "react-bootstrap";
 
 class EventList extends Component {

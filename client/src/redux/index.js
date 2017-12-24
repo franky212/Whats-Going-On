@@ -1,7 +1,7 @@
 import {createStore, combineReducers, applyMiddleware} from "redux";
 import thunk from "redux-thunk";
 
-import events from "./events";
+import events from "./mapmarker";
 import currentEvents from "./currentevents";
 import localEvents from "./localevents";
 

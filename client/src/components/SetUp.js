@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {FormControl, Button, ControlLabel} from "react-bootstrap";
 import {connect} from "react-redux";
-import {addMarker} from "../redux/events";
+import {addMarker} from "../redux/mapmarker";
 
 class SetUp extends Component {
   constructor() {
