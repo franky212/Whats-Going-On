@@ -79,7 +79,7 @@ export class MapContainer extends Component {
           <div>
             <h1 className="infobox-header">{this.state.selectedPlace.name}</h1>
             <h3 className="infobox-subheading">Date: {this.state.selectedPlace.date}</h3>
-            <img width="100%" src={this.state.selectedPlace.imgUrl} />
+            <img width="100%" src={this.state.selectedPlace.imgUrl} alt=""/>
             <div className="infobox-container">
               <p className="infobox-text">{this.state.selectedPlace.description}</p>
             </div>
