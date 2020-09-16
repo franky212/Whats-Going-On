@@ -44,6 +44,31 @@ this.state = {
     }
 ```
 
+## Event Handlers
+
+onMarkerClick takes props, the marker clicked, and the event. It then sets state to show the InfoWindow associated with that marker as well as sets the activeMarker.
+
+onMapClicked is a function to close open markers if they are currently shown. This is to avoid the user clicking to open all InfoWindows.
+
+```
+onMarkerClick(props, marker, e) {
+    this.setState({
+      selectedPlace: props,
+      activeMarker: marker,
+      showingInfoWindow: true
+    });
+  }
+
+  onMapClicked(props) {
+    if (this.state.showingInfoWindow) {
+      this.setState({
+        showingInfoWindow: false,
+        activeMarker: null
+      })
+    }
+  }
+```
+
 ## render
 
 At time of render I check to see if there are any markers that the user has currently pinned on the map, and I provide those markers' positions in latitude and longitude. I also place a click event on the marker that handles showing the events details as well as a way for the user to buy a ticket from Ticket Master in the InfoWindow component.
@@ -102,4 +127,71 @@ render() {
       </Map>
     )
   }
+```
+
+# EventList.js
+
+## state
+
+The state for the EventList.js component contains a search term the user entered, a success popup flag, a warning popup flag, and a loading flag.
+
+```
+this.state = {
+      search: "",
+      isSuccessShown: false,
+      isWarningShown: false,
+      loading: false
+    }
+```
+
+## render
+
+When rendered the component will show a loading icon if data is not yet present. This maps through all events currently available from the search term through Ticket Master and stores them in listItems.
+
+What is then rendered is all of the events as well as the popups, and form controls.
+
+```
+render() {
+    let listItems;
+    if(this.state.loading) {
+      listItems = <i className="fa fa-cog fa-spin fa-3x fa-fw"></i>;
+    } else {
+      listItems = this.props.currentEvents.map((event) => {
+        return (
+          <Row key={event.id}>
+            <Col xs={12}>
+              <div onClick={() => this.handleClick(event)} className="event-card">
+                <h2 className="event-header">{event._embedded.venues[0].name}</h2>
+                <h4>{event.name}</h4>
+                <small>{event._embedded.venues[0].city.name}</small>
+                <h5>{event.dates.start.localDate}</h5>
+              </div>
+            </Col>
+          </Row>
+        )
+      });
+    }
+    return (
+      <div>
+        {this.state.isSuccessShown ? <Alert className="alert" bsStyle="success"> <strong>({this.props.localEvents.length}) Event Added to map!</strong> <p>You should go check it out!</p></Alert> : null}
+        {this.state.isWarningShown ? <Alert className="alert" bsStyle="danger"> <strong>Sorry you can't add the same event to the map!</strong></Alert> : null}
+        <Grid className="grid">
+          <Col xs={12}>
+            <form onSubmit={this.handleSubmit}>
+              <FormControl
+                className="search-bar"
+                onChange={this.handleInputChange}
+                name="search"
+                placeholder="Search..." />
+              <Button
+                bsSize="large"
+                className="search-button">Submit</Button>
+            </form>
+          </Col>
+          {listItems}
+        </Grid>
+    </div>
+    )
+  }
+}
 ```
