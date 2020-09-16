@@ -144,6 +144,68 @@ this.state = {
     }
 ```
 
+## Event Handlers / Lifecycle Methods
+
+componentWillReceiveProps - Marked UNSAFE in React 16. [React Docs](https://reactjs.org/docs/react-component.html#unsafe_componentwillreceiveprops)
+  This checked the length of currentEvents in nextProps to set the loading flag to false if data is present.
+
+handleClick detects if the clicked event is already pinned on the map. If so it won't allow the user to add that to the localEvents array, and shows a warning.
+
+handleInputChange just keeps track of what the user is typing, and updates search in state.
+
+handleSubmit sets loading to true, and gets all events with the users search term.
+
+```
+componentWillReceiveProps(nextProps) {
+    if(nextProps.currentEvents.length >= 0) {
+      this.setState({
+        loading: false
+      })
+    }
+  }
+
+  handleClick(event) {
+    let isFound = false;
+    for(let i = 0; i < this.props.localEvents.length; i++) {
+      if(this.props.localEvents[i].id === event.id) {
+        isFound = true;
+      }
+    }
+    if(isFound) {
+      this.setState({
+        isWarningShown: true
+      });
+      setTimeout(() => {
+        this.setState({
+          isWarningShown: false
+        })
+      }, 2000)
+    } else {
+      this.props.addEvent(event);
+      this.setState({
+        isSuccessShown: true
+      })
+      setTimeout(() => {
+        this.setState({
+          isSuccessShown: false
+        })
+      }, 2000)
+    }
+  }
+
+  handleInputChange(e) {
+    this.setState({[e.target.name]: e.target.value})
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    this.setState({
+      loading: true,
+    })
+    this.props.getEvents(this.state.search);
+  }
+```
+
 ## render
 
 When rendered the component will show a loading icon if data is not yet present. This maps through all events currently available from the search term through Ticket Master and stores them in listItems.
